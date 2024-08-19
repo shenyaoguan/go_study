@@ -1,0 +1,37 @@
+syntax = "proto3"; // This is the syntax of the proto file. It is always proto3 for gRPC.
+
+package person; // This is the package name. It is used to group the messages and services.
+
+option go_package = "github/pixel/pb/person;person"; // This is the go_package option. It is used to specify the Go package name and import path.
+
+import "home/home.proto"; // This is the import statement. It is used to import the messages and services from other proto files.
+
+message Person{
+  string name = 1;
+  int32 age = 2;
+  SEX sex = 3;
+  repeated string emails = 4;
+
+  enum SEX{
+    MALE = 0;
+    FEMALE = 1;
+    OTHER = 2;
+  }
+
+  oneof TestOneOf{
+    string test_oneof = 5;
+    int32 test_oneof_int = 6;
+  }
+
+  home.Home home = 7;
+
+  reserved "test_map";
+}
+
+
+service PersonService{
+  rpc GetPerson(Person) returns (Person); //traditional
+  rpc GetPersonIn(stream Person) returns (Person); //
+  rpc GetPersonOut(Person) returns (stream Person); //
+  rpc GetPersonIO(stream Person) returns (stream Person); //
+}

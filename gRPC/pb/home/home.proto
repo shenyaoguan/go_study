@@ -1,0 +1,9 @@
+syntax = "proto3"; // This is the syntax of the proto file. It is always proto3 for gRPC.
+
+package home; // This is the package name. It is used to group the messages and services.
+
+option go_package = "github/pixel/pb/home;home"; // This is the go_package option. It is used to specify the Go package name and import path.
+
+message Home{
+  string home_num = 1;
+}
